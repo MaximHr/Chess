@@ -3,20 +3,23 @@
     padding:0;
     box-sizing: border-box;
 }
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 
 h1 {
     font-size: 3rem;
     text-align: center;
     margin: 1rem 0;
 }
-body {
+.game {
     width: 100vw;
     height: 100vh;
-    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(0, 97, 183);
+    padding-top: 0rem !important;
+}
+.hidden {
+    display: none !important;
 }
 .grid {
     display: grid;
@@ -30,7 +33,7 @@ body {
 .square {
     width: 75px;
     height: 75px;
-    transition: transform 0.5s ease-in-out;
+    /* transition: transform 0.1s ease-in-out; */
     background-color: black;
 }
 img {
@@ -44,4 +47,109 @@ img {
 
 .clicked {
     background-color: yellow !important;
+}
+
+
+/* first page design */
+.body {
+    padding-top: 3rem;
+    background-color: rgb(231, 231, 231);
+}
+.title {
+    font-style: italic;
+    color: white;
+    text-align: center;
+    font-size: 4rem;
+    margin-bottom: 3rem;
+    font-family: 'Lato', sans-serif;
+}
+.boardimg {
+    width: calc(430px * 1.5);
+    height: calc(305px * 1.5);
+}
+.btn {
+    background-color: black;
+    color: white;
+    font-size: 2.5rem;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    box-shadow: 0 0 15px #333;
+    padding: 0.5rem 3rem;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 2rem;
+    display: block;
+    transition: background 0.5s ease-in-out;
+    background-color: rgb(241, 137, 0);
+}
+.btn:hover {
+    background-color: #222;
+}
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0px 0px 20px #333;
+    width: 400px;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+}
+.form div {
+    margin: 1rem;
+}
+.flex {
+    display: flex;
+    justify-content: center;
+    gap: 10rem;
+    align-items: center;
+}
+input {
+    width: 200px;
+    height: 40px;
+    margin: 0.5rem 0;
+    font-size: 1.25rem;
+    padding-left: 5px;
+    outline: none;
+    border: 1px solid #333;
+    display: block;
+}
+label {
+    font-size: 1.5rem;
+}
+svg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.n1 {
+    position: absolute;
+    left: 100px;
+    bottom: 100px;
+}
+.clock1 {
+    position: absolute;
+    left: 100px;
+    bottom: 50px;
+}
+.clock2 {
+    position: absolute;
+    left: 100px;
+    top: 150px;
+}
+.underline {
+    text-decoration: underline 4px solid rgb(241, 137, 0);
+}
+.n2 {
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    color: black;
+}
+
+.title {
+    text-shadow: 0 0 5px #333;
 }

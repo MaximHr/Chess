@@ -5,15 +5,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./responsive.css">
     <script 
         src="https://code.jquery.com/jquery-3.6.0.min.js"       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
     </script>
     <title>Chess</title>
 </head>
-<body>
-    <div class="grid">
+<body class="body">
+    <div class="navbar">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgb(241, 137, 0)" fill-opacity="1" d="M0,128L26.7,122.7C53.3,117,107,107,160,128C213.3,149,267,203,320,224C373.3,245,427,235,480,224C533.3,213,587,203,640,197.3C693.3,192,747,192,800,181.3C853.3,171,907,149,960,160C1013.3,171,1067,213,1120,218.7C1173.3,224,1227,192,1280,170.7C1333.3,149,1387,139,1413,133.3L1440,128L1440,0L1413.3,0C1386.7,0,1333,0,1280,0C1226.7,0,1173,0,1120,0C1066.7,0,1013,0,960,0C906.7,0,853,0,800,0C746.7,0,693,0,640,0C586.7,0,533,0,480,0C426.7,0,373,0,320,0C266.7,0,213,0,160,0C106.7,0,53,0,27,0L0,0Z"></path></svg>
+        <h1 class="title">Play Chess With Your Friends</h1>
 
     </div>
+    <div class="flex">
+        <div>
+            <div class="form">
+                <div>
+                    <label for="clock">Time for each player:</label>
+                    <input id='clock' type="number" value="10">
+                </div>
+                <div>
+                    <label for="name">Player's 1 Name:</label>
+                    <input id='name1' type="text" value="John">
+                </div>
+                <div>
+                    <label for="name">Player's 2 Name:</label>
+                    <input id='name2' type="text" value="Emma">
+                </div>
+    
+                <a class="btn">Play</a>
+            </div>
+        </div>
+        <img class='boardimg' src="./images/board.png" alt="Chess Board">
+    </div>
+
+    <h1 class="name n1"></h1>
+    <h1 class="clock1 hidden"></h1>
+    <div class="grid hidden">
+        
+    </div>
+    <h1 class="name n2"></h1>
+    <h1 class="clock2 hidden"></h1>
+
     <script src="./main.js"></script>
 </body>
 </html>

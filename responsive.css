@@ -1,0 +1,39 @@
+@media only screen and (max-width: 1300px) {
+    .flex {
+        gap: 5rem;
+    }
+}
+@media only screen and (max-width: 1200px) {
+    .flex {
+        gap: 10rem;
+        margin-top: 10rem;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-width: 100vw;
+        z-index: -1;
+        background-color: rgb(241, 137, 0);
+    }
+    .navbar h1 {
+        position: relative;
+        top: 50px;
+    }
+    svg {
+        top: 100px;
+    }
+}
+@media only screen and (max-width: 900px) {
+    .title{
+        font-size: 3rem;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .title{
+        font-size: 2rem;
+    }
+}

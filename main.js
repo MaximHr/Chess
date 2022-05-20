@@ -1,20 +1,21 @@
-// 6 hours and 20mins
+// 8 hours and 30mins
+// 1:05
 
 // todo:
-// местенето на черните фигури
-// дизайн 
-// кой играе и времето на играча
-// автоматично обръщане на масата
 // малко рокадо
 // голяма рокадо
+// pawn becomes queen
+// responsive design
 // шах detection
 // checkmate detection
 // шах detection преди да си мръднал
-// pawn becomes queen
+// gameover  (time or checkmate)
 
 const grid = [];
 let turn = 1; // ако turn e 1, белите са наред, ако turn e -1, черните са наред
 let num = 0;
+
+let clock1, clock2;
 
 function  checkSqaureValue(i, j) {
     // проверява каква е стойността на квадрата и слага фигурата
@@ -62,7 +63,7 @@ function  checkSqaureValue(i, j) {
     }
     if(grid[i][j] === -3) { //black knight
         $(`[x=${i}][y=${j}]`)[0].innerHTML = 
-        '<img src="./images/knightBlack.png"></img>';
+        '<img src="./images/knightBlack2.png"></img>';
     }
     if(grid[i][j] === -4) { //black rook
         $(`[x=${i}][y=${j}]`)[0].innerHTML = 
@@ -744,6 +745,14 @@ function move(oldX, oldY, newX, newY, piece) {
         if(available[i].x === newX && available[i].y === newY) {
             num = 0;
             turn = -turn;
+            rotateBoard();
+            if(turn === 1) {
+                $('.n1').addClass('underline');
+                $('.n2').removeClass('underline');
+            } else {
+                $('.n1').removeClass('underline');
+                $('.n2').addClass('underline');
+            }
             $('.square').removeClass('clicked');
             grid[oldX][oldY] = 0;
             grid[newX][newY] = piece;
@@ -787,3 +796,36 @@ function rotateBoard() {
         $('.square').removeClass('rotate');
     }
 }
+
+let time, name1, name2;
+
+$('.btn').on('click', () => {
+    time = $('#clock')[0].value;
+    name1 =  $('#name1')[0].value
+    name2 = $('#name2')[0].value;
+    
+    $('.flex').addClass('hidden');
+    $('body').addClass('game');
+    $('svg').addClass('hidden');
+    $('.title').addClass('hidden');
+    $('.grid').removeClass('hidden');
+    $('.n1').addClass('underline');
+    $('.n1')[0].innerText = name1;
+    $('.n2')[0].innerText = name2;
+    $('.clock1').removeClass('hidden')
+    $('.clock2').removeClass('hidden')
+    clock1 = time * 60;
+    clock2 = time * 60; 
+    $('.clock1')[0].innerText = `${Math.floor(clock1 / 60)}:${clock1 - Math.floor(clock1 / 60) * 60}`;
+    $('.clock2')[0].innerText = `${Math.floor(clock2 / 60)}:${clock2 - Math.floor(clock1 / 60) * 60}`;
+});
+
+setInterval(() => {
+    if(turn === 1) {
+        clock1 -= 1;
+        $('.clock1')[0].innerText = `${Math.floor(clock1 / 60)}:${clock1 - Math.floor(clock1 / 60) * 60}`;
+    } else {
+        clock2 -= 1;
+        $('.clock2')[0].innerText = `${Math.floor(clock2 / 60)}:${clock2 - Math.floor(clock1 / 60) * 60}`;
+    }
+}, 1000)
