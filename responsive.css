@@ -53,4 +53,7 @@
     .boardimg {
         transform: scale(0.9);
     }
+    body {
+        overflow-x: hidden;
+    }
 }
