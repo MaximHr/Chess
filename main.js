@@ -1,5 +1,5 @@
-// 8 hours and 30mins
-// 1:05
+// 9hours and 40mins;
+// v kolko pochvam (shte otneme 20min)
 
 // todo:
 // малко рокадо
@@ -15,6 +15,8 @@ const grid = [];
 let turn = 1; // ако turn e 1, белите са наред, ако turn e -1, черните са наред
 let num = 0;
 
+let canWhiteCastle = true;
+let canBlackCastle = true;
 let clock1, clock2;
 
 function  checkSqaureValue(i, j) {
@@ -257,6 +259,33 @@ function move(oldX, oldY, newX, newY, piece) {
         if(oldX > 0 && oldY < 7 && grid[oldX - 1][oldY + 1] <= 0) {
             available.push({x: oldX - 1, y: oldY + 1});
         }
+        if(canWhiteCastle && newX === 2 && newY === 7 && grid[0][7] === 4 && grid[1][7] === 0 && grid[2][7] === 0 && grid[3][7] === 0) {
+            grid[oldX][oldY] = 0;
+            grid[newX][newY] = 6;
+            grid[newX + 1][newY] = 4;
+            grid[0][7] = 0;
+
+            checkSqaureValue(oldX, oldY);
+            checkSqaureValue(newX, newY);
+            checkSqaureValue(newX + 1, newY);
+            checkSqaureValue(0, 7);
+            canWhiteCastle = false;
+            newTurn();
+        }
+        if(canWhiteCastle && newX === 6 && newY === 7 && grid[5][7] === 0 && grid[6][7] === 0 && grid[7][7] === 4) {
+            grid[oldX][oldY] = 0;
+            grid[newX][newY] = 6;
+            grid[newX - 1][newY] = 4;
+            grid[7][7] = 0;
+
+            checkSqaureValue(oldX, oldY);
+            checkSqaureValue(newX, newY);
+            checkSqaureValue(newX - 1, newY);
+            checkSqaureValue(7, 7);
+            canWhiteCastle = false;
+            newTurn();
+        }
+
     } else if(piece === -6) {
         // available moves for the black king
         if(oldX < 7 && grid[oldX + 1][oldY] >= 0) {
@@ -282,6 +311,32 @@ function move(oldX, oldY, newX, newY, piece) {
         }
         if(oldX > 0 && oldY < 7 && grid[oldX - 1][oldY + 1] >= 0) {
             available.push({x: oldX - 1, y: oldY + 1});
+        }
+        if(canBlackCastle && newX === 2 && newY === 0 && grid[0][0] === -4 && grid[1][0] === 0 && grid[2][0] === 0 && grid[3][0] === 0) {
+            grid[oldX][oldY] = 0;
+            grid[newX][newY] = -6;
+            grid[newX + 1][newY] = -4;
+            grid[0][0] = 0;
+
+            checkSqaureValue(oldX, oldY);
+            checkSqaureValue(newX, newY);
+            checkSqaureValue(newX + 1, newY);
+            checkSqaureValue(0, 0);
+            canBlackCastle = false;
+            newTurn();
+        }
+        if(canBlackCastle && newX === 6 && newY === 0 && grid[5][0] === 0 && grid[6][0] === 0 && grid[7][0] === -4) {
+            grid[oldX][oldY] = 0;
+            grid[newX][newY] = -6;
+            grid[newX - 1][newY] = -4;
+            grid[7][0] = 0;
+
+            checkSqaureValue(oldX, oldY);
+            checkSqaureValue(newX, newY);
+            checkSqaureValue(newX - 1, newY);
+            checkSqaureValue(7, 0);
+            canBlackCastle = false;
+            newTurn();
         }
 
     }else if(piece === 2) {
@@ -743,21 +798,26 @@ function move(oldX, oldY, newX, newY, piece) {
 
     for(let i = 0;i < available.length;i ++) {
         if(available[i].x === newX && available[i].y === newY) {
-            num = 0;
-            turn = -turn;
-            rotateBoard();
-            if(turn === 1) {
-                $('.n1').addClass('underline');
-                $('.n2').removeClass('underline');
-            } else {
-                $('.n1').removeClass('underline');
-                $('.n2').addClass('underline');
-            }
-            $('.square').removeClass('clicked');
+            newTurn();
             grid[oldX][oldY] = 0;
             grid[newX][newY] = piece;
             checkSqaureValue(oldX, oldY);
             checkSqaureValue(newX, newY);
+
+            if(piece === 6) {
+                canWhiteCastle = false;
+            }
+            if(piece === -6) {
+                canBlackCastle = false;
+            }
+
+            //TODO:
+            // if(piece === 4) {
+            //     canWhiteCastle = false;
+            // }
+            // if(piece === -4) {
+            //     canBlackCastle = false;
+            // }
 
         }
     }
@@ -820,6 +880,19 @@ $('.btn').on('click', () => {
     $('.clock2')[0].innerText = `${Math.floor(clock2 / 60)}:${clock2 - Math.floor(clock1 / 60) * 60}`;
 });
 
+function newTurn() {
+    num = 0;
+    turn = -turn;
+    rotateBoard();
+    if(turn === 1) {
+        $('.n1').addClass('underline');
+        $('.n2').removeClass('underline');
+    } else {
+        $('.n1').removeClass('underline');
+        $('.n2').addClass('underline');
+    }
+    $('.square').removeClass('clicked');
+}
 setInterval(() => {
     if(turn === 1) {
         clock1 -= 1;
@@ -828,4 +901,4 @@ setInterval(() => {
         clock2 -= 1;
         $('.clock2')[0].innerText = `${Math.floor(clock2 / 60)}:${clock2 - Math.floor(clock1 / 60) * 60}`;
     }
-}, 1000)
+}, 1000);

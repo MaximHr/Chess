@@ -18,6 +18,9 @@ h1 {
     align-items: center;
     padding-top: 0rem !important;
 }
+body {
+    overflow-x: hidden;
+}
 .hidden {
     display: none !important;
 }
@@ -129,11 +132,13 @@ svg {
     position: absolute;
     left: 100px;
     bottom: 100px;
+    max-height: 50px;
 }
 .clock1 {
     position: absolute;
     left: 100px;
     bottom: 50px;
+    max-height: 50px;
 }
 .clock2 {
     position: absolute;
