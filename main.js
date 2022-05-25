@@ -1,14 +1,9 @@
-// 9hours and 40mins;
-// v kolko pochvam (shte otneme 20min)
-
+// I have been working on this project for: 10hours
 // todo:
-// малко рокадо
-// голяма рокадо
-// pawn becomes queen
 // responsive design
 // шах detection
-// checkmate detection
 // шах detection преди да си мръднал
+// checkmate detection
 // gameover  (time or checkmate)
 
 const grid = [];
@@ -803,13 +798,24 @@ function move(oldX, oldY, newX, newY, piece) {
             grid[newX][newY] = piece;
             checkSqaureValue(oldX, oldY);
             checkSqaureValue(newX, newY);
-
+            
+            if(piece === 1 && newY === 0) {
+                //white pawn becomes queen
+                grid[newX][newY] = 5;
+                checkSqaureValue(newX, newY)
+            }
+            if(piece === -1 && newY === 7) {
+                //black pawn becomes queen
+                grid[newX][newY] = -5;
+                checkSqaureValue(newX, newY)
+            }
             if(piece === 6) {
                 canWhiteCastle = false;
             }
             if(piece === -6) {
                 canBlackCastle = false;
             }
+
 
             //TODO:
             // if(piece === 4) {
