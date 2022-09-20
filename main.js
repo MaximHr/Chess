@@ -14,6 +14,7 @@ let canWhiteCastle = true;
 let canBlackCastle = true;
 let clock1, clock2;
 
+
 function  checkSqaureValue(i, j) {
     // проверява каква е стойността на квадрата и слага фигурата
     //0 = empty
@@ -883,28 +884,37 @@ $('.btn').on('click', () => {
     clock1 = time * 60;
     clock2 = time * 60; 
     $('.clock1')[0].innerText = `${Math.floor(clock1 / 60)}:${clock1 - Math.floor(clock1 / 60) * 60}`;
-    $('.clock2')[0].innerText = `${Math.floor(clock2 / 60)}:${clock2 - Math.floor(clock1 / 60) * 60}`;
+    $('.clock2')[0].innerText = `${Math.floor(clock2 / 60)}:${clock2 - Math.floor(clock2 / 60) * 60}`;
 });
 
+let interval1, interval2;
 function newTurn() {
     num = 0;
     turn = -turn;
     rotateBoard();
     if(turn === 1) {
+        clearInterval(interval2)
+        interval1 = setInterval(() => {
+            clock1 -=1;
+        }, 1000)
         $('.n1').addClass('underline');
         $('.n2').removeClass('underline');
+
     } else {
+        clearInterval(interval1);
         $('.n1').removeClass('underline');
         $('.n2').addClass('underline');
+        interval2 = setInterval(() => {
+            clock2 -=1;
+        }, 1000)
     }
     $('.square').removeClass('clicked');
 }
+
+
 setInterval(() => {
-    if(turn === 1) {
-        clock1 -= 1;
-        $('.clock1')[0].innerText = `${Math.floor(clock1 / 60)}:${clock1 - Math.floor(clock1 / 60) * 60}`;
-    } else {
-        clock2 -= 1;
-        $('.clock2')[0].innerText = `${Math.floor(clock2 / 60)}:${clock2 - Math.floor(clock1 / 60) * 60}`;
-    }
+    $('.clock1')[0].innerText = `${Math.floor(clock1 / 60)}:${clock1 - Math.floor(clock1 / 60) * 60}`;
+
+    $('.clock2')[0].innerText = `${Math.floor(clock2 / 60)}:${clock2 - Math.floor(clock2 / 60) * 60}`;
+
 }, 1000);
